@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html" %}
 
 {% block content %}
@@ -30,3 +31,37 @@
 <a href="{{ url_for('export_json') }}" class="btn btn-outline-primary">Eksport do JSON</a>
 <a href="{{ url_for('export_pdf') }}" class="btn btn-outline-primary">Eksport do PDF</a>
 {% endblock %}
+=======
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Wyniki analizy</h2>
+<p><strong>IOC:</strong> {{ ioc }} (typ: {{ ioc_type }})</p>
+
+{% for name, result in analyses.items() %}
+  <h4>{{ name }}</h4>
+  <table class="table table-bordered table-sm">
+    <thead class="thead-light">
+      <tr><th colspan="2">{{ name }} - wynik</th></tr>
+    </thead>
+    <tbody>
+      {% for key, value in flatten_json(result).items() %}
+      <tr>
+        <td>{{ key }}</td>
+        <td>{{ value }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endfor %}
+
+<h4>Ocena modelu LLM</h4>
+<table class="table table-bordered table-sm">
+  <tr><th>Ocena ryzyka</th><td>{{ llm_data.assessment }}</td></tr>
+  <tr><th>Zalecenia</th><td>{{ llm_data.recommendation }}</td></tr>
+</table>
+
+<a href="{{ url_for('export_json') }}" class="btn btn-outline-primary">Eksport do JSON</a>
+<a href="{{ url_for('export_pdf') }}" class="btn btn-outline-primary">Eksport do PDF</a>
+{% endblock %}
+>>>>>>> 439815418e15c003cdd98710a46972befb55a351
